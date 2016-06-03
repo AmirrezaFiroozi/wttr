@@ -2,7 +2,7 @@
 #Author : Amirreza Firoozi
 #name : wttr
 
-wttr_ver="1.2" #define script version
+wttr_ver="1.21" #define script version
 if [ -f "$HOME/.wttr/default.txt" ];then #check if user set default city or not . if user did load it to variable def
    cd $HOME/.wttr
  def=$(cat default.txt) 
