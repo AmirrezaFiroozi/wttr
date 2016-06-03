@@ -8,7 +8,7 @@ if [ -f "$HOME/.wttr/default.txt" ];then #check if user set default city or not 
  def=$(cat default.txt) 
 
 elif [ ! -d $HOME/.wttr ];then #if he/she didn`t make a blank file
-     mkdir ".wttr"
+     mkdir ".wttr"  2>/dev/null
     echo "" > default.txt 
     def=""
 fi
@@ -35,9 +35,9 @@ elif [ "$#" -gt "2" ];then
     read -p "Do you Really want to remove wttr?(y/n)" response
     if [ "$response" == "y" ];then
          cd /usr/bin
-        sudo rm -R "wttr"
+        sudo rm -R "wttr"    2>/dev/null 
         if [ -d "$HOME/.wttr" ];then
-        sudo rm -d "$HOME/.wttr"
+        sudo rm -d "$HOME/.wttr"      2>/dev/null
         fi
         echo -e "Script has deleted :("
     else
@@ -47,11 +47,12 @@ elif [ "$#" -gt "2" ];then
     "-sdef") # set the default city
    if [ ! -d $HOME/.wttr ];then
          cd $HOME
-          mkdir ".wttr" 
+          mkdir ".wttr" 2>/dev/null 
      fi    
      if [ "$#" == "2" ];then
  	 cd $HOME/.wttr
         echo "$2" > default.txt
+	 echo -e "\n Congratulations!! we set $2 as your default city. You can check its weather condition by typing only wttr Since now :)" 
      else
     read -p " Enter your city name to set as the default city (example : fasa) : " def
         if [ "$def" == "" ] && [ "$#" -ls "2" ];then
@@ -59,9 +60,9 @@ elif [ "$#" -gt "2" ];then
     else
         cd $HOME/.wttr
         echo $def > default.txt
+	 echo -e "\n Congratulations!! we set $def as your default city. You can check its weather condition by typing only wttr Since now :)" 
      fi
      fi #end of the second if
-	 echo -e "\n Congratulations!! we set $def as your default city. You can check its weather condition by typing only wttr Since now :)" 
     ;;
     "")
         cd $HOME
@@ -74,6 +75,5 @@ elif [ "$#" -gt "2" ];then
     ;;
   esac
 fi
-
 
 
