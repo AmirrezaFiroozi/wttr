@@ -3,10 +3,10 @@
 ### Created by : Amirreza Firoozi:
 ### Thanks to : Jadi , Alireza Amirsamimi & Mostafa Asadi
 # Installation 
-- ```$ sudo apt install git ```// if you have Not installed git yet.
-- ```$ git clone https://github.com/AmirrezaFiroozi/wttr```
-- ```$ cd wttr```
-- ```$ bash installer.sh```
+- Make sure you have activated aur repository
+- ```$ sudo pacman -S yaourt ```// if you have Not installed yaourt yet.
+- ```$ yaourt wttr``` // dont run " yaourt " as root
+
 
 > you can use these arguments if you want : 
 
