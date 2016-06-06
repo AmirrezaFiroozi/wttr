@@ -31,7 +31,7 @@ elif [ "$#" -gt "2" ];then
     sudo pacman -S curl
     ;;
     "--changelog")
-    cat /home/persia/.wttr/changelog 
+    cat /usr/share/wttr/changelog
     ;;
     "-rm") 
     read -p "Do you Really want to remove wttr?(y/n)" response
