@@ -1,13 +1,12 @@
-#!/bin/bash
 #Author : Amirreza Firoozi
 #name : wttr
 #License : GPL3
-wttr_ver="1.2" #define script version
+wttr_ver="1.2.1" #define script version
 if [ -f "$HOME/.wttr/default.txt" ];then #check if user set default city or not . if user did load it to variable def
    cd $HOME/.wttr
  def=$(cat default.txt) 
 
-elif [ ! -d $HOME/.wttr ];then #if he/she didn`t, make a blank file
+elif [ ! -d $HOME/.wttr ];then #if he/she didn`t make a blank file
      mkdir ".wttr"  2>/dev/null
     echo "" > default.txt 
     def=""
@@ -20,7 +19,7 @@ elif [ "$#" -gt "2" ];then
  else
   case $1 in 
     "-h") #showing help
-        echo -e "\n This is a simple app to check weather condition.\n wttr is under GPL3 License. source is available on Github : https://Github.com/AmirrezaFiroozi/wttr  \n Created by : Amirreza Firoozi \n Thanks to : Jadi & Alireza Amirsamimi & Mostafa Asadi \n Write wttr {your city name} to check the  weather condition of your city. example : wttr fasa \n -m for photo of moon \n -h for some help (this page) \n -v for script version \n -i to install curl which is necessary for script to run correctly\n -rm to remove the script :( \n -sdef to define a city as your default city \n Any bugs? Any suggestions? Contact us : firoozi128.af&gmail.com " 
+        echo -e "\n This is a simple app to check weather condition.\n wttr is under GPL3 License. source is available on Github : https://Github.com/AmirrezaFiroozi/wttr  \n Created by : Amirreza Firoozi \n Thanks to : Jadi & Alireza Amirsamimi & Mostafa Asadi \n Write wttr {your city name} to check the  weather condition of your city. example : wttr fasa \n -m for photo of moon \n -h for some help (this page) \n -v for script version \n -i to install curl which is necessary for script to run correctly\n -rm to remove the script :( \n -sdef to define a city as your default city \n --changelog to view the script changelog \n Any bugs? Any suggestions? Contact us : firoozi128.af&gmail.com " 
     ;;
     "-v")
         echo -e " wttr_VERSION is : "$wttr_ver" "
@@ -31,13 +30,18 @@ elif [ "$#" -gt "2" ];then
     "-i")
     sudo pacman -S curl
     ;;
+    "--changelog")
+    cat /home/persia/.wttr/changelog 
+    ;;
     "-rm") 
     read -p "Do you Really want to remove wttr?(y/n)" response
     if [ "$response" == "y" ];then
+     
         if [ -d "$HOME/.wttr" ];then
-        sudo rm -dr $HOME/.wttr"      2>/dev/null
+        sudo rm -dr "$HOME/.wttr"      2>/dev/null
         fi
         sudo pacman -R wttr
+        echo -e "Script has deleted :("
     else
         echo -e "Opration canceled"
     fi
