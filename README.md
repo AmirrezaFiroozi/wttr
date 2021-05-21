@@ -2,7 +2,7 @@
 
 A Bash script to check weather condition via terminal created by Carsten Brueggenolte.
 
-Current Version: **1.30_2021-05-21**
+Current Version: **1.40_2021-05-22**
 
 ![wttr](terminal-wttr.png)
 
@@ -22,6 +22,14 @@ The `wttr` script comes with some parameters explained below
 The following arguments are available:
 
 ```bash
+	# get weather report for a city
+	wttr cologne
+	wttr "Den Haag, Netherlands"
+
+	# get another, different weather report display
+	wttr -v2 cologne
+	wttr -v2 "Den Haag, Netherlands"
+
 	# install curl which is necessary for script to run correctly 
 	wttr -i 
     
