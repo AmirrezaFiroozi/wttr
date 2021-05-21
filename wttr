@@ -71,8 +71,11 @@ else
 	        echo -e ""
             echo -e "Done. Set '$2' as your default city. You can check its weather condition by typing only wttr Since now :)" 
         else
-            read -p " Enter your city name to set as the default city (example : cologne) : " def
-            if [ "$def" == "" ] && [ "$#" -ls "2" ];then
+            read -p "Enter your city name to set as the default city (example : cologne) : " def
+            # replacing spaces with + signes and removing non wanted chars
+            def=${def// /+}
+            def=${def//[^a-zA-Z0-9+]}
+            if [ "$def" == "" ] && [ "$#" -ne "2" ];then
                 echo "you did NOT enter anything ..."
             else
                 cd $HOME/.config/wttr
