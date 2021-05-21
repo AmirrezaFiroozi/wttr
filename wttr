@@ -6,7 +6,7 @@
 #Update 1.30: changed default city filename to 'default-city.txt'
 
 
-wttr_ver="1.30" #define script version
+wttr_ver="1.30_2021-05-21" #define script version
 if [ -f "$HOME/.config/wttr/default-city.txt" ];then #check if user set default city or not . if user did load it to variable def
     cd $HOME/.config/wttr
     def=$(cat default-city.txt) 
