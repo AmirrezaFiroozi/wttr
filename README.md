@@ -22,35 +22,35 @@ The `wttr` script comes with some parameters explained below
 The following arguments are available:
 
 ```bash
-	# get weather report for a city
-	wttr cologne
-	wttr "Den Haag, Netherlands"
+    # get weather report for a city
+    wttr cologne
+    wttr "Den Haag, Netherlands"
 
-	# get another, different weather report display
-	wttr -v2 cologne
-	wttr -v2 "Den Haag, Netherlands"
+    # get another, different weather report display
+    wttr -v2 cologne
+    wttr -v2 "Den Haag, Netherlands"
 
-	# install curl which is necessary for script to run correctly 
-	wttr -i 
+    # install curl which is necessary for script to run correctly 
+    wttr -i 
     
-	# set a city as your default city.
-	# without a second argument, wttr will ask you for input
-	wttr -sdef
-	
-	# set cologne as default city
+    # set a city as your default city.
+    # without a second argument, wttr will ask you for input
+    wttr -sdef
+    
+    # set Den Haag as default city
     wttr -sdef "Den Haag, Netherlands"
-	
-	# see a photo of the Moon
+    
+    # see a photo of the Moon
     wttr -m
 
-	# uninstall and remove the wttr script
+    # uninstall and remove the wttr script
     wttr -rm
-	
-	# show the script version
-	wttr -v
-	
-	# show the help screen
-	wttr -h
+    
+    # show the script version
+    wttr -v
+    
+    # show the help screen
+    wttr -h
 ```
 
 ## License
