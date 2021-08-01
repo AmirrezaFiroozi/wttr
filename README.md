@@ -1,33 +1,64 @@
 # wttr
-### A Bash script to check weather condition via terminal .
-### Created by : Amirreza Firoozi:
-### Thanks to : Jadi , Alireza Amirsamimi & Mostafa Asadi
-# Installation 
-- ```$ sudo apt install git ```// if you have Not installed git yet.
-- ```$ git clone https://github.com/AmirrezaFiroozi/wttr```
-- ```$ cd wttr```
-- ```$ bash installer.sh```
 
-> you can use these arguments if you want : 
+A Bash script to check weather condition via terminal created by Carsten Brueggenolte.
 
-- -i                       install curl which is necessary for script to run correctly 
+Current Version: **1.40_2021-05-22**
 
-				 EX : wttr -i 
+![wttr](terminal-wttr.png)
 
-- -sdef                    set a city as your default city.
+## Installation 
 
-				 EX : wttr -sdef
-				 EX : wttr -sdef fasa 
-- -m                       see a photo of Moon
+```bash
+$ cd /tmp
+$ git clone https://github.com/cblte/bash-script-wttr
+$ cd bash-script-wttr
+$ bash installer.sh
+```
 
-- -rm                      remove the script
+## Usage 
 
-				 EX : wttr -rm 
+The `wttr` script comes with some parameters explained below
 
-- -v                       script version
+The following arguments are available:
 
+```bash
+    # get weather report for a city
+    wttr cologne
+    wttr "Den Haag, Netherlands"
 
-- -h                       show help
+    # get another, different weather report display
+    wttr -v2 cologne
+    wttr -v2 "Den Haag, Netherlands"
 
-# License
+    # install curl which is necessary for script to run correctly 
+    wttr -i 
+    
+    # set a city as your default city.
+    # without a second argument, wttr will ask you for input
+    wttr -sdef
+    
+    # set Den Haag as default city
+    wttr -sdef "Den Haag, Netherlands"
+    
+    # see a photo of the Moon
+    wttr -m
+
+    # uninstall and remove the wttr script
+    wttr -rm
+    
+    # show the script version
+    wttr -v
+    
+    # show the help screen
+    wttr -h
+```
+
+## License
+
 This program is free software ; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation
+
+## Credit 
+
+goes to Amirreza Firoozi for the initial script and some other people he also mentioned in his code: Jadi , Alireza Amirsamimi & Mostafa Asadi. 
+
+Thanks!
