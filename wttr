@@ -114,23 +114,23 @@ else
             city="$2"
             city=${city// /+}
             city=${city//[^a-zA-Z0-9+]}
-            curl $URLv2"$city"
+            curl $URLv2 "$city"
         else
-            curl $URLv2"$def"
+            curl $URLv2 "$def"
         fi
         cd $HOME
         
     ;;
     "")
         cd $HOME
-        curl $URL"$def"
+        curl $URL "$def"
     ;;
     *)
 
     city=$1
     city=${city// /+}
     city=${city//[^a-zA-Z0-9+]}
-    curl $URL"$city"
+    curl $URL "$city"
       
     ;;
   esac
