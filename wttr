@@ -69,7 +69,7 @@ else
         echo -e "     When using '-v3' you do not need to add the '.sxl' to the" 
         echo -e "     end of the region/city name. The script will add it automatically."
         echo -e ""
-        echo -e "Any bugs? Any suggestions? Contact information at https://zn80.net/impressum"
+        echo -e "Any bugs? Any suggestions? Contact information at https://cbrueggenolte.de/impressum"
         echo -e ""
     ;;
     "-v")
