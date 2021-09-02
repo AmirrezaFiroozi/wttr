@@ -2,15 +2,17 @@
 
 A Bash script to check weather condition via terminal created by Carsten Brueggenolte.
 
-Current Version: **1.40_2021-05-22**
+Current Version: **1.53_2021-09-02**
 
 ![wttr](terminal-wttr.png)
 
 ## Thanks Amirreza Firoozi
 
-for trusting me in maintaing this repo to the best I can! (https://github.com/AmirrezaFiroozi/wttr)
+for trusting me in maintaing this repo as best as I can! (https://github.com/AmirrezaFiroozi/wttr)
 
 ## Installation 
+
+The installer will install the script into the directory `$HOME/.local/bin/` of the current user. Please check the `installer.sh` before you execute it!
 
 ```bash
 $ cd /tmp
@@ -34,7 +36,12 @@ The following arguments are available:
     wttr -v2 cologne
     wttr -v2 "Den Haag, Netherlands"
 
-    # install curl which is necessary for script to run correctly 
+    # get another, different weather report display
+    wttr -v3 cologne
+    wttr -v3 "Den Haag, Netherlands"
+
+    # install curl which is necessary for script to run correctly
+    # currently it only works on systems with 'apt' installed 
     wttr -i 
     
     # set a city as your default city.
@@ -43,6 +50,10 @@ The following arguments are available:
     
     # set Den Haag as default city
     wttr -sdef "Den Haag, Netherlands"
+    
+    # get todays forecast or the current weather only
+    wttr -t
+    wttr -n
     
     # see a photo of the Moon
     wttr -m
@@ -59,10 +70,10 @@ The following arguments are available:
 
 ## License
 
-This program is free software ; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation
 
 ## Credit 
 
-goes to Amirreza Firoozi for the initial script and some other people he also mentioned in his code: Jadi , Alireza Amirsamimi & Mostafa Asadi. 
+goes to Amirreza Firoozi for the initial script and some other people he also mentioned in his code: Jadi , Alireza Amirsamimi & Mostafa Asadi, doc-ock. 
 
-Thanks!
+Thanks you guys!
