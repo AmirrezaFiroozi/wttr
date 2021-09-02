@@ -56,6 +56,7 @@ else
         echo -e ""
         echo -e "Parameters:"
         echo -e "    -h for some help (this page)"
+        echo -e "    -hh for the official wttr.in/:help page"
         echo -e "    -v for script version"
         echo -e "    -i to install curl which is necessary for script to run correctly"
         echo -e "    -m for photo of moon"
@@ -71,6 +72,9 @@ else
         echo -e ""
         echo -e "Any bugs? Any suggestions? Contact information at https://cbrueggenolte.de/impressum"
         echo -e ""
+    ;;
+    "-hh")
+        curl https://wttr.in/:help
     ;;
     "-v")
         echo -e "wttr_VERSION is : "$wttr_ver" "
@@ -130,7 +134,6 @@ else
             curl $URLv2"$def"
         fi
         cd $HOME
-        
     ;;
     "-v3")
         echo -e "Fetching v3 of wttr.in"
