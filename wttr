@@ -1,4 +1,5 @@
 #!/bin/bash
+#
 #Author : Amirreza Firoozi
 #Author : Carsten Brueggenolte
 #name : wttr
@@ -8,70 +9,100 @@
 #Update 1.41: add spaces in between city and url
 #Update 1.42: reverse changes with the space between url and city
 #Update 1.50: add v3.wttr.in - thanks to dok-ock for the inspiration and the fixes
+#Update 1.51: update about section and add it to the help screen
 
-wttr_ver="1.50_2021-09-02" #define script version
+wttr_ver="1.51_2021-09-02" #define script version
 
 GITHUB_REPO_URL="https://github.com/cblte/bash-script-wttr"
 URL="https://wttr.in/"
 URLv2="https://v2.wttr.in/"
 URLv3="https://v3.wttr.in/"
 
+__about="
+About the
 
+██╗    ██╗████████╗████████╗██████╗    ██╗███╗   ██╗
+██║    ██║╚══██╔══╝╚══██╔══╝██╔══██╗   ██║████╗  ██║
+██║ █╗ ██║   ██║      ██║   ██████╔╝   ██║██╔██╗ ██║
+██║███╗██║   ██║      ██║   ██╔══██╗   ██║██║╚██╗██║
+╚███╔███╔╝   ██║      ██║   ██║  ██║██╗██║██║ ╚████║
+ ╚══╝╚══╝    ╚═╝      ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝╚═╝  ╚═══╝
+                      script by Carsten Brueggenolte
+
+
+This is a simple bash script to check weather condition
+with the help of wttr.in. The script 'wttr' is under GPL3 License.
+
+Source is available on Github: $GITHUB_REPO_URL
+
+Big THANK YOU goes to
+    - 'Amirreza Firoozi' (https://github.com/AmirrezaFiroozi/wttr)
+      for creating the initial script
+    - 'dok-ock' (https://github.com/doc-ock/) for the idea to add
+      version 3 of wttr.in and some other useful parameters.
+"
+
+__help="
+Write 'wttr {your+city+name}' to check the  weather condition of your city.
+Surround city name with single- or double-quotes if city name contains more than one word.
+You can also put a '+' (plus-sign) in beetween words when you do not want to surround with quotes.
+
+Examples:
+   wttr cologne
+   wttr \"Den Haag, Netherland\"
+   wttr Den+Haag
+   wttr \"Den Haag Street, South Africa\"
+   wttr New+York
+
+You can type 'wttr' only if you have defined a standard city.
+
+Parameters:
+    -a show some information about this script
+    -h for some help (this page)
+    -hh for the official wttr.in/:help page
+    -v for script version
+    -i to install curl which is necessary for script to run correctly
+    -m for photo of moon
+    -rm to remove the script :(
+    -sdef to define a city as your default city
+    -v2 to fetch different weather report view for the standard city
+    -v2 {your city name} to fetch different weather report view for city mentioned
+    -v3 {your city name} to fetch an in-terminal graphic for the given region.
+
+Hint:
+     When using '-v3' you do not need to add the '.sxl' to the
+     end of the region/city name. The script will add it automatically.
+
+Any bugs? Any suggestions? Contact information at https://cbrueggenolte.de/impressum
+"
+
+# ------------------------
+# ----- Script starts here
+# ------------------------
+
+# Check if a standard city has been set
 if [ -f "$HOME/.config/wttr/default-city.txt" ];then #check if user set default city or not . if user did load it to variable def
     cd $HOME/.config/wttr
-    def=$(cat default-city.txt) 
+    def=$(cat default-city.txt)
 elif [ ! -d $HOME/.config/wttr ];then #if he/she didn`t make a blank file
     mkdir "$HOME/.config/wttr"  2>/dev/null
     cd $HOME/.config/wttr
-    echo "" > default-city.txt 
+    echo "" > default-city.txt
     def=""
 fi
 
+# Print out some help if no arguments provided and no standard city been set
 if [ "$#" == "0" ] && [ "$def" == "" ];then
     echo -e "You have not entered any parameters and no standard city set yet.\nNeed help? try 'wttr -h'"
 elif [ "$#" -gt "2" ];then
     echo -e "too many parameters. \nNeed help? try 'wttr -h'"
 else
-    case $1 in 
+    case $1 in
     "-a") # about
-        echo -e "About 'wttr' shell script"
-        echo -e ""
-        echo -e "This is a simple app to check weather condition."
-        echo -e "wttr is under GPL3 License. source is available on Github : $GITHUB_REPO_URL" 
-        echo -e "This version got created by: Carsten Brueggenolte (https://github.com/cblte)"
-        echo -e "A big thank you goes to: Amirreza Firoozi - he wrote the initial script (https://github.com/AmirrezaFiroozi/wttr)"
-        echo -e "Another thank you to dok-ock for the idea to add version 3 of wttr.in (https://github.com/doc-ock/)"
-        echo -e ""
+        echo "$__about"
     ;;
     "-h") #showing help
-        echo -e ""
-        echo -e "Write 'wttr {your city name}' to check the  weather condition of your city."
-        echo -e "Surround city name with single- or double-quotes if city name contains more than one word."
-        echo -e "Examples:"
-        echo -e "   wttr cologne"
-        echo -e "   wttr \"Den Haag, Netherland\""
-        echo -e "   wttr \"Den Haag Street, South Africa\""
-        echo -e ""
-        echo -e "You can type 'wttr' only if a standard city has been set"
-        echo -e ""
-        echo -e "Parameters:"
-        echo -e "    -h for some help (this page)"
-        echo -e "    -hh for the official wttr.in/:help page"
-        echo -e "    -v for script version"
-        echo -e "    -i to install curl which is necessary for script to run correctly"
-        echo -e "    -m for photo of moon"
-        echo -e "    -rm to remove the script :("
-        echo -e "    -sdef to define a city as your default city"
-        echo -e "    -v2 to fetch different weather report view for the standard city"
-        echo -e "    -v2 {your city name} to fetch different weather report view for city mentioned"
-        echo -e "    -v3 {your city name} to fetch an in-terminal graphic for the given region."
-        echo -e ""
-        echo -e "Hint:"
-        echo -e "     When using '-v3' you do not need to add the '.sxl' to the" 
-        echo -e "     end of the region/city name. The script will add it automatically."
-        echo -e ""
-        echo -e "Any bugs? Any suggestions? Contact information at https://cbrueggenolte.de/impressum"
-        echo -e ""
+        echo "$__help"
     ;;
     "-hh")
         curl https://wttr.in/:help
@@ -85,11 +116,11 @@ else
     "-i")
         sudo apt install curl
     ;;
-    "-rm") 
+    "-rm")
         read -p "Do you Really want to remove wttr?(y/n)" response
         if [ "$response" == "y" ];then
             cd /usr/bin
-            sudo rm -R "wttr"    2>/dev/null 
+            sudo rm -R "wttr"    2>/dev/null
             if [ -d "$HOME/.config/wttr" ];then
                 sudo rm -d "$HOME/.config/wttr" 2>/dev/null
             fi
@@ -101,13 +132,13 @@ else
     "-sdef") # set the default city
         if [ ! -d $HOME/.config/wttr ];then
             cd $HOME
-            mkdir -p ".config/wttr" 2>/dev/null 
-        fi    
+            mkdir -p ".config/wttr" 2>/dev/null
+        fi
         if [ "$#" == "2" ];then
  	        cd $HOME/.config/wttr
             echo "$2" > default-city.txt
 	        echo -e ""
-            echo -e "Done. Set '$2' as your default city. You can check its weather condition by typing only 'wttr' now :)" 
+            echo -e "Done. Set '$2' as your default city. You can check its weather condition by typing only 'wttr' now :)"
         else
             read -p "Enter your city name to set as the default city (example : cologne) : " def
             # replacing spaces with + signes and removing non wanted chars
@@ -119,7 +150,7 @@ else
                 cd $HOME/.config/wttr
                 echo $def > default-city.txt
 	            echo -e ""
-                echo -e "Done. Set '$def' as your default city. You can check its weather condition by typing only 'wttr' now :)" 
+                echo -e "Done. Set '$def' as your default city. You can check its weather condition by typing only 'wttr' now :)"
             fi
         fi #end of the second if
     ;;
@@ -157,7 +188,7 @@ else
     city=${city// /+}
     city=${city//[^a-zA-Z0-9+]}
     curl $URL"$city"
-      
+
     ;;
   esac
 fi
