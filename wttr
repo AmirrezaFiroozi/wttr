@@ -108,7 +108,7 @@ else
         curl https://wttr.in/:help
     ;;
     "-v")
-        echo -e "wttr_VERSION is : "$wttr_ver" "
+        echo -e "wttr_VERSION is: "$wttr_ver" "
     ;;
     "-m")
         curl http://wttr.in/moon
