@@ -5,8 +5,10 @@
 #Update 1.30: change config dir to $HOME/.config/wttr to go in line with other configuration files
 #Update 1.30: changed default city filename to 'default-city.txt'
 #Update 1.40: add v2.wttr.in feature and did some clean up
+#Update 1.41: add spaces in between city and url
+#Update 1.42: reverse changes with the space between url and city
 
-wttr_ver="1.41_2021-05-31" #define script version
+wttr_ver="1.42_2021-09-02" #define script version
 
 GITHUB_REPO_URL="https://github.com/cblte/bash-script-wttr"
 URL="https://wttr.in/"
@@ -92,7 +94,7 @@ else
  	        cd $HOME/.config/wttr
             echo "$2" > default-city.txt
 	        echo -e ""
-            echo -e "Done. Set '$2' as your default city. You can check its weather condition by typing only wttr Since now :)" 
+            echo -e "Done. Set '$2' as your default city. You can check its weather condition by typing only 'wttr' now :)" 
         else
             read -p "Enter your city name to set as the default city (example : cologne) : " def
             # replacing spaces with + signes and removing non wanted chars
@@ -104,7 +106,7 @@ else
                 cd $HOME/.config/wttr
                 echo $def > default-city.txt
 	            echo -e ""
-                echo -e "Done. Set '$def' as your default city. You can check its weather condition by typing only wttr Since now :)" 
+                echo -e "Done. Set '$def' as your default city. You can check its weather condition by typing only 'wttr' now :)" 
             fi
         fi #end of the second if
     ;;
@@ -114,23 +116,23 @@ else
             city="$2"
             city=${city// /+}
             city=${city//[^a-zA-Z0-9+]}
-            curl $URLv2 "$city"
+            curl $URLv2"$city"
         else
-            curl $URLv2 "$def"
+            curl $URLv2"$def"
         fi
         cd $HOME
         
     ;;
     "")
         cd $HOME
-        curl $URL "$def"
+        curl $URL"$def"
     ;;
     *)
 
     city=$1
     city=${city// /+}
     city=${city//[^a-zA-Z0-9+]}
-    curl $URL "$city"
+    curl $URL"$city"
       
     ;;
   esac
