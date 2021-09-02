@@ -10,8 +10,9 @@
 #Update 1.42: reverse changes with the space between url and city
 #Update 1.50: add v3.wttr.in - thanks to dok-ock for the inspiration and the fixes
 #Update 1.51: update about section and add it to the help screen
+#Update 1.52: move help and about into their own variables for better maintanance
 
-wttr_ver="1.51_2021-09-02" #define script version
+wttr_ver="1.52_2021-09-02" #define script version
 
 GITHUB_REPO_URL="https://github.com/cblte/bash-script-wttr"
 URL="https://wttr.in/"
