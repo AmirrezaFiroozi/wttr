@@ -1,5 +1,8 @@
 # wttr
 
+## This repository is no longer actively maintained.
+## Use https://github.com/cblte/bash-script-wttr instead!
+
 A Bash script to check weather condition via terminal created by Carsten Brueggenolte.
 
 Current Version: **1.40_2021-05-22**
