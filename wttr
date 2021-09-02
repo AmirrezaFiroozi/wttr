@@ -209,7 +209,7 @@ else
            city=${city//[^a-zA-Z0-9+]}
            curl $URLv3"$city".sxl
         else
-           curl $URLv3"$def"
+           curl $URLv3"$def".sxl
         fi
             cd $HOME
     ;;
