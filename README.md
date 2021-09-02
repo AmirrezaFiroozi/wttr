@@ -77,3 +77,10 @@ This program is free software; you can redistribute it and/or modify it under th
 goes to Amirreza Firoozi for the initial script and some other people he also mentioned in his code: Jadi , Alireza Amirsamimi & Mostafa Asadi, doc-ock. 
 
 Thanks you guys!
+
+## Screenshots
+
+![wttr -v2](terminal-wttr-v2.png)
+
+![wttr -v3](terminal-wttr-v3.png)
+
