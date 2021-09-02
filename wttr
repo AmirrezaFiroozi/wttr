@@ -11,15 +11,19 @@
 #Update 1.50: add v3.wttr.in - thanks to dok-ock for the inspiration and the fixes
 #Update 1.51: update about section and add it to the help screen
 #Update 1.52: move help and about into their own variables for better maintanance
+#Update 1.53: add a parameters '-t' current forecast and '-n' current weather
 
-wttr_ver="1.52_2021-09-02" #define script version
+
+wttr_ver="1.53_2021-09-02" #define script version
 
 GITHUB_REPO_URL="https://github.com/cblte/bash-script-wttr"
 URL="https://wttr.in/"
 URLv2="https://v2.wttr.in/"
 URLv3="https://v3.wttr.in/"
 
-__about="
+About() 
+{
+echo -e ="
 About the
 
 ██╗    ██╗████████╗████████╗██████╗    ██╗███╗   ██╗
@@ -42,8 +46,11 @@ Big THANK YOU goes to
     - 'dok-ock' (https://github.com/doc-ock/) for the idea to add
       version 3 of wttr.in and some other useful parameters.
 "
+}
 
-__help="
+Help()
+{
+echo -e "
 Write 'wttr {your+city+name}' to check the  weather condition of your city.
 Surround city name with single- or double-quotes if city name contains more than one word.
 You can also put a '+' (plus-sign) in beetween words when you do not want to surround with quotes.
@@ -61,11 +68,13 @@ Parameters:
     -a show some information about this script
     -h for some help (this page)
     -hh for the official wttr.in/:help page
-    -v for script version
     -i to install curl which is necessary for script to run correctly
     -m for photo of moon
+    -n show current weather only
     -rm to remove the script :(
     -sdef to define a city as your default city
+    -t show today's forecast
+    -v show script version
     -v2 to fetch different weather report view for the standard city
     -v2 {your city name} to fetch different weather report view for city mentioned
     -v3 {your city name} to fetch an in-terminal graphic for the given region.
@@ -76,6 +85,7 @@ Hint:
 
 Any bugs? Any suggestions? Contact information at https://cbrueggenolte.de/impressum
 "
+}
 
 # ------------------------
 # ----- Script starts here
@@ -100,22 +110,31 @@ elif [ "$#" -gt "2" ];then
 else
     case $1 in
     "-a") # about
-        echo "$__about"
+        About
     ;;
     "-h") #showing help
-        echo "$__help"
+        Help
     ;;
     "-hh")
         curl https://wttr.in/:help
     ;;
-    "-v")
-        echo -e "wttr_VERSION is: "$wttr_ver" "
+    "-i")
+        sudo apt install curl
     ;;
     "-m")
         curl http://wttr.in/moon
     ;;
-    "-i")
-        sudo apt install curl
+    "-n")
+        echo -e "Fetching current weather"
+        if [ "$#" == "2" ];then
+            city="$2"
+            city=${city// /+}
+            city=${city//[^a-zA-Z0-9+]}
+            curl $URL"$city?0n"
+        else
+            curl $URL"$def?0n"
+        fi
+        cd $HOME
     ;;
     "-rm")
         read -p "Do you Really want to remove wttr?(y/n)" response
@@ -154,6 +173,21 @@ else
                 echo -e "Done. Set '$def' as your default city. You can check its weather condition by typing only 'wttr' now :)"
             fi
         fi #end of the second if
+    ;;
+    "-t")
+        echo -e "Fetching today's frorecast"
+        if [ "$#" == "2" ];then
+            city="$2"
+            city=${city// /+}
+            city=${city//[^a-zA-Z0-9+]}
+            curl $URL"$city?1n"
+        else
+            curl $URL"$def?1n"
+        fi
+        cd $HOME
+    ;;
+    "-v")
+        echo -e "wttr_VERSION is: "$wttr_ver" "
     ;;
     "-v2")
         echo -e "Fetching v2 of wttr.in"
