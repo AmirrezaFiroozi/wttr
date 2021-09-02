@@ -7,12 +7,14 @@
 #Update 1.40: add v2.wttr.in feature and did some clean up
 #Update 1.41: add spaces in between city and url
 #Update 1.42: reverse changes with the space between url and city
+#Update 1.50: add v3.wttr.in - thanks to dok-ock for the inspiration and the fixes
 
-wttr_ver="1.42_2021-09-02" #define script version
+wttr_ver="1.50_2021-09-02" #define script version
 
 GITHUB_REPO_URL="https://github.com/cblte/bash-script-wttr"
 URL="https://wttr.in/"
 URLv2="https://v2.wttr.in/"
+URLv3="https://v3.wttr.in/"
 
 
 if [ -f "$HOME/.config/wttr/default-city.txt" ];then #check if user set default city or not . if user did load it to variable def
@@ -36,8 +38,9 @@ else
         echo -e ""
         echo -e "This is a simple app to check weather condition."
         echo -e "wttr is under GPL3 License. source is available on Github : $GITHUB_REPO_URL" 
-        echo -e "Created by : Carsten Brueggenolte"
+        echo -e "This version got created by: Carsten Brueggenolte (https://github.com/cblte)"
         echo -e "A big thank you goes to: Amirreza Firoozi - he wrote the initial script (https://github.com/AmirrezaFiroozi/wttr)"
+        echo -e "Another thank you to dok-ock for the idea to add version 3 of wttr.in (https://github.com/doc-ock/)"
         echo -e ""
     ;;
     "-h") #showing help
@@ -52,16 +55,22 @@ else
         echo -e "You can type 'wttr' only if a standard city has been set"
         echo -e ""
         echo -e "Parameters:"
-        echo -e "    -m for photo of moon"
         echo -e "    -h for some help (this page)"
         echo -e "    -v for script version"
         echo -e "    -i to install curl which is necessary for script to run correctly"
+        echo -e "    -m for photo of moon"
         echo -e "    -rm to remove the script :("
         echo -e "    -sdef to define a city as your default city"
         echo -e "    -v2 to fetch different weather report view for the standard city"
         echo -e "    -v2 {your city name} to fetch different weather report view for city mentioned"
+        echo -e "    -v3 {your city name} to fetch an in-terminal graphic for the given region."
         echo -e ""
-        echo -e "Any bugs? Any suggestions? Contact information at https://zn80.net/impressum" 
+        echo -e "Hint:"
+        echo -e "     When using '-v3' you do not need to add the '.sxl' to the" 
+        echo -e "     end of the region/city name. The script will add it automatically."
+        echo -e ""
+        echo -e "Any bugs? Any suggestions? Contact information at https://zn80.net/impressum"
+        echo -e ""
     ;;
     "-v")
         echo -e "wttr_VERSION is : "$wttr_ver" "
@@ -111,7 +120,7 @@ else
         fi #end of the second if
     ;;
     "-v2")
-        echo -e "Fetchin v2 of wttr.in"
+        echo -e "Fetching v2 of wttr.in"
         if [ "$#" == "2" ];then
             city="$2"
             city=${city// /+}
@@ -122,6 +131,18 @@ else
         fi
         cd $HOME
         
+    ;;
+    "-v3")
+        echo -e "Fetching v3 of wttr.in"
+        if [ "$#" == "2" ];then
+           city="$2"
+           city=${city// /+}
+           city=${city//[^a-zA-Z0-9+]}
+           curl $URLv3"$city".sxl
+        else
+           curl $URLv3"$def"
+        fi
+            cd $HOME
     ;;
     "")
         cd $HOME
