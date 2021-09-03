@@ -21,7 +21,7 @@ URL="https://wttr.in/"
 URLv2="https://v2.wttr.in/"
 URLv3="https://v3.wttr.in/"
 
-About() 
+About()
 {
 echo -e ="
 About the
@@ -114,7 +114,7 @@ else
 	# echo -e "Checking for upgrades..."
     	# git clone $GITHUB_REPO_URL /tmp/wttr
 	# bash /tmp/wttr/installer.sh
-    # ;;    
+    # ;;
     "-a") # about
         About
     ;;
