@@ -12,9 +12,9 @@
 #Update 1.51: update about section and add it to the help screen
 #Update 1.52: move help and about into their own variables for better maintanance
 #Update 1.53: add a parameters '-t' current forecast and '-n' current weather
+#Update 1.54: spell check and added some optional parameters for -help, -today, -now
 
-
-wttr_ver="1.53_2021-09-02" #define script version
+wttr_ver="1.54_2021-09-03" #define script version
 
 GITHUB_REPO_URL="https://github.com/cblte/bash-script-wttr"
 URL="https://wttr.in/"
@@ -43,7 +43,7 @@ Source is available on Github: $GITHUB_REPO_URL
 Big THANK YOU goes to
     - 'Amirreza Firoozi' (https://github.com/AmirrezaFiroozi/wttr)
       for creating the initial script
-    - 'dok-ock' (https://github.com/doc-ock/) for the idea to add
+    - 'doc-ock' (https://github.com/doc-ock/) for the idea to add
       version 3 of wttr.in and some other useful parameters.
 "
 }
@@ -109,10 +109,16 @@ elif [ "$#" -gt "2" ];then
     echo -e "too many parameters. \nNeed help? try 'wttr -h'"
 else
     case $1 in
+    # currently doesn't work: upgrade. There is some permissions problem
+    # "-u" | "-upgrade")
+	# echo -e "Checking for upgrades..."
+    	# git clone $GITHUB_REPO_URL /tmp/wttr
+	# bash /tmp/wttr/installer.sh
+    # ;;    
     "-a") # about
         About
     ;;
-    "-h") #showing help
+    "-h" | "-help") #showing help
         Help
     ;;
     "-hh")
@@ -124,7 +130,7 @@ else
     "-m")
         curl http://wttr.in/moon
     ;;
-    "-n")
+    "-n" | "-now")
         echo -e "Fetching current weather"
         if [ "$#" == "2" ];then
             city="$2"
@@ -137,7 +143,7 @@ else
         cd $HOME
     ;;
     "-rm")
-        read -p "Do you Really want to remove wttr?(y/n)" response
+        read -p "Do you really want to remove wttr? (y/n)" response
         if [ "$response" == "y" ];then
             cd /usr/bin
             sudo rm -R "wttr"    2>/dev/null
@@ -174,8 +180,8 @@ else
             fi
         fi #end of the second if
     ;;
-    "-t")
-        echo -e "Fetching today's frorecast"
+    "-t" | "-today")
+        echo -e "Fetching today's forecast"
         if [ "$#" == "2" ];then
             city="$2"
             city=${city// /+}
